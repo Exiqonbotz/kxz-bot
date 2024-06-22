@@ -549,7 +549,34 @@ reply('Antilink wurde erfolgreich deaktiviert')
   }
   }
   break
+   
+  //
+   case 'restart': case 'sleep':
+    if (!isCreator) return reply(mess.owner)
+    if (isBanChat) return reply(mess.bangc);
+    if (!isCreator) return reply(mess.owner)
+    const baronnlod = [
   
+      "《 █▒▒▒▒▒▒▒▒▒▒▒》10%",
+      "《 ████▒▒▒▒▒▒▒▒》30%",
+      "《 ███████▒▒▒▒▒》50%",
+        "《Hail Exiqon》",
+        "《Hail Baron》",
+      "《 ██████████▒▒》80%",
+      "《 ████████████》100%",
+      "𝙽𝙴𝚄𝚂𝚃𝙰𝚁𝚃 𝙴𝚁𝙵𝙾𝙻𝙶𝚁𝙴𝙸𝙲𝙷!✅"
+      ]
+      let { key } = await Phoenix.sendMessage(from, {text: 'ʟᴏᴀᴅɪɴɢ...'})
+      
+      for (let i = 0; i < baronnlod.length; i++) {
+    await Phoenix.sendMessage(from, {text: baronnlod[i], edit: key });
+      }
+    await sleep(1000)
+    process.exit()
+    break;
+
+///////
+
   case 'setppbot': case 'setbotpp': {
 if (!isCreator) return replay(mess.botowner)
 if (!quoted) return reply(`Send/Reply Image With Caption ${prefix + command}`)

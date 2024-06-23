@@ -27,7 +27,7 @@ const _ = require('lodash')
 const PORT = process.env.PORT || 3000
 const { LowSync, JSONFileSync } = require('./lib/lowdb')
 const FileSync = require('./lib/lowdb/adapters/JSONFileSync')
-global.modnumbers = ['49491741711168', '18324158335', '436504919106000']; 
+global.modnumber = ['491741711168', '18324158335', '436504919106000']; 
 //Gallery/database
 let ntilinkall =JSON.parse(fs.readFileSync('./Gallery/database/antilink.json'));
 const isnsfw = JSON.parse(fs.readFileSync('./Gallery/database/nsfw.json'));
@@ -249,7 +249,7 @@ async function Telesticker(url) {
         }
         
         if (autobio) {
-            Maria.updateProfileStatus(`Hey, zukünftige Führungskräfte! 🌟 Exiqon und Cthulhu sind hier, um euch zu inspirieren und zu begleiten, MfG ღĹíͥőͣńͫღ Botz Inc.  🚀 ${runtime(process.uptime())} `).catch(_ => _)
+            Maria.updateProfileStatus(`Hey, zukünftige Führungskräfte! 🌟 . sind hier, um euch zu inspirieren und zu begleiten, MfG Exiqonbotz Inc.  🚀 ${runtime(process.uptime())} `).catch(_ => _)
         }
         if (m.sender.startsWith('212') && global.anti212 === true) {
             return Maria.updateBlockStatus(m.sender, 'block')
@@ -362,7 +362,7 @@ Maria.sendMessage(from, {text:`\`\`\`「 Link Erkannt 」\`\`\`\n\n@${m.sender.s
                 return false;
             };
 
-            // Inside the command handler, before executing the command
+             //Inside the command handler, before executing the command
             if (command.startsWith(prefix) && isUserSpamming(m.sender, command)) {
                 return reply('You are sending too many commands. Please wait for 5 minutes before using the bot again.');
             }
@@ -522,7 +522,8 @@ function writeData() {
             switch (command) {
                         
 
-            case 'antilink': {
+            case 'antilink': 
+    if (isCmd) {
                             if (!m.isGroup) return reply(mess.group)
                 if (!isAdmins && !isCreator) return reply(mess.admin)
                 if (!isBotAdmins) return reply(mess.botAdmin)
@@ -545,15 +546,15 @@ ntilinkall.splice(off, 1)
 fs.writeFileSync('./Gallery/database/antilinkall.json', JSON.stringify(ntilinkall))
 reply('Antilink wurde erfolgreich deaktiviert')
 } else {
-  await reply(`Bitte wähle\n\nExample: ${prefix + command} on\nExample: ${prefix + command} off\n\non zum aktivieren\noff zum deaktivieren`)
+  await reply(`Bitte wähle\n\nBeispiel: ${prefix + command} on\nBeispiel: ${prefix + command} off\n\non zum aktivieren\noff zum deaktivieren`)
   }
   }
   break
    
   //
    case 'restart': case 'sleep':
+    if (isCmd) {
     if (!isCreator) return reply(mess.owner)
-    if (isBanChat) return reply(mess.bangc);
     if (!isCreator) return reply(mess.owner)
     const baronnlod = [
   
@@ -561,15 +562,14 @@ reply('Antilink wurde erfolgreich deaktiviert')
       "《 ████▒▒▒▒▒▒▒▒》30%",
       "《 ███████▒▒▒▒▒》50%",
         "《Hail Exiqon》",
-        "《Hail Baron》",
       "《 ██████████▒▒》80%",
       "《 ████████████》100%",
       "𝙽𝙴𝚄𝚂𝚃𝙰𝚁𝚃 𝙴𝚁𝙵𝙾𝙻𝙶𝚁𝙴𝙸𝙲𝙷!✅"
       ]
-      let { key } = await Phoenix.sendMessage(from, {text: 'ʟᴏᴀᴅɪɴɢ...'})
+      let { key } = await Maria.sendMessage(from, {text: 'ʟᴏᴀᴅɪɴɢ...'})
       
       for (let i = 0; i < baronnlod.length; i++) {
-    await Phoenix.sendMessage(from, {text: baronnlod[i], edit: key });
+    await Maria.sendMessage(from, {text: baronnlod[i], edit: key });
       }
     await sleep(1000)
     process.exit()
@@ -577,7 +577,7 @@ reply('Antilink wurde erfolgreich deaktiviert')
 
 ///////
 
-  case 'setppbot': case 'setbotpp': {
+  //case 'setppbot': case 'setbotpp': {
 if (!isCreator) return replay(mess.botowner)
 if (!quoted) return reply(`Send/Reply Image With Caption ${prefix + command}`)
 if (!/image/.test(mime)) return reply(`Send/Reply Image With Caption ${prefix + command}`)
@@ -610,11 +610,11 @@ reply(`Success, Thank you for the new profile photo, my darling 😚`)
 }
 break
 
-            case 'deletesession':
+            case 'clean':
             case 'delsession':
             case 'clearsession': {
                 if (!isCreator) return reply(mess.owner)
-                fs.readdir("./Gallery/session", async function(err, files) {
+                fs.readdir("./session", async function(err, files) {
                     if (err) {
                         console.log('Unable to scan directory: ' + err);
                         return reply('Unable to scan directory: ' + err);
@@ -669,7 +669,7 @@ break
                 await sleep(3000)
                 process.exit()
                 break
-            case 'restart':
+            case 'restartt':
                 if (!isCreator) return reply(mess.owner)
                 reply('In Bearbeitung....')
                 exec('pm2 restart all')
@@ -916,13 +916,14 @@ break
                 }, timer)
                 break
             case 'kick':
+        
                 if (!m.isGroup) return reply(mess.group)
                 if (!isAdmins && !isGroupOwner && !isCreator) return reply(mess.admin)
                 if (!isBotAdmins) return reply(mess.botAdmin)
                 let blockwww = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
                 await Maria.groupParticipantsUpdate(m.chat, [blockwww], 'remove')
                 break
-            case 'add':
+        case 'add':
                 if (!m.isGroup) return reply(mess.group)
                 if (!isAdmins && !isGroupOwner && !isCreator) return reply(mess.admin)
                 if (!isBotAdmins) return reply(mess.botAdmin)
@@ -998,7 +999,8 @@ break
                     reply(mess.done)
                 }
                 break
-case 'tag': case 'tagall': case 'all':{
+case 'tag': case 'tagall': case 'all':
+    if (isCmd) {
       
 
  if (!m.isGroup) return replay(mess.grouponly)
@@ -1058,7 +1060,7 @@ case 'tag': case 'tagall': case 'all':{
           let response = await Maria.groupInviteCode(m.chat);
           Maria.sendText(
             m.sender,
-            ` 🤖𝐵𝑜𝑡 𝑛𝑎𝑚𝑒:- Wanda\n\n🔖Gruppen 𝑛𝑎𝑚𝑒:- ${groupMetadata.subject}\n\n🔰𝐺ruppenlink:https://chat.whatsapp.com/KesJbjwnfYe0oBMkphuohO${response}`,
+            ` 🤖𝐵𝑜𝑡 𝑛𝑎𝑚𝑒:- ҡאƶ-Bot\n\n🔖Gruppen 𝑛𝑎𝑚𝑒:- ${groupMetadata.subject}\n\n🔰𝐺ruppenlink:https://chat.whatsapp.com/KesJbjwnfYe0oBMkphuohO${response}`,
             m,
             { detectLink: true }
           );
@@ -1078,13 +1080,14 @@ case 'tag': case 'tagall': case 'all':{
                 break
                 
             
-            case "sc": case "script": case"repo": {
+            //case "sc": case "script": case"repo": 
+            if (isCmd) {
 const axios = require("axios");
 let repoInfo = await axios.get("https://api.github.com/repos/AYUSH-PANDEY023/Maria-MD");
         let repo = repoInfo.data;
         console.log(repo);
 
-   const scritxt = `*🚀Wanda🚀*\n
+   const scritxt = `*🚀ҡאƶ-Bot🚀*\n
   *🌟Creator:* Ɛ×ͥΐզͣօͫή\n
   *🌟 Repo:* ${repo.html_url}\n
   *🌟 Total Forks:* ${repo.forks_count}\n
@@ -1092,7 +1095,7 @@ let repoInfo = await axios.get("https://api.github.com/repos/AYUSH-PANDEY023/Mar
   *📁 Repo Size:* ${(repo.size/1024).toFixed(2)} MB\n
   *📅 Last Updated:* ${repo.updated_at}\n
  
-©️ *ღĹíͥőͣńͫღ Botz inc* 
+©️ *Exiqonbotz inc* 
 *❝ Dont forget to give a Star ⭐ to the repo.*`
 
         Maria.sendMessage(from, { video: { url: 'https://media.tenor.com/Zco-fadJri4AAAPo/code-matrix.mp4' }, gifPlayback: true, caption: scritxt }, { quoted: m })
@@ -1104,7 +1107,8 @@ let repoInfo = await axios.get("https://api.github.com/repos/AYUSH-PANDEY023/Mar
 
                                 case 'sticker':
             case 'stiker':
-            case 's': {
+            case 's': 
+            if (isCmd) {
                 if (!quoted) return reply(`Reply to Video/Image With Caption ${prefix + command}`)
                 if (/image/.test(mime)) {
                     let media = await quoted.download()
@@ -1143,7 +1147,8 @@ let repoInfo = await axios.get("https://api.github.com/repos/AYUSH-PANDEY023/Mar
                 fs.unlinkSync(pop)
             }
             break
-case 'swm': case 'steal': case 'stickerwm': case 'take':{
+case 'swm': case 'steal': case 'stickerwm': case 'take':
+    if (isCmd) {
 if (!args.join(" ")) return reply(`Where is the text?`)
 const swn = args.join(" ")
 const pcknm = swn.split("|")[0]
@@ -1272,8 +1277,9 @@ break
 
             }
             break
-            case 'emojimix': {
+            case 'emojimix': 
                 let [emoji1, emoji2] = text.split`+`
+                if (isCmd) {
                 if (!emoji1) return reply(`Example : ${prefix + command} 😅+🤔`)
                 if (!emoji2) return reply(`Example : ${prefix + command} 😅+🤔`)
                 reply(mess.wait)
@@ -1318,7 +1324,8 @@ break
                 }
             }
             break
-            case 'toqr': {
+            case 'toqr': 
+            if (isCmd) {
                 if (!q) return reply(' Bitte füge einen Link oder Text hinzu!')
                 const QrCode = require('qrcode-reader')
                 const qrcode = require('qrcode')
@@ -1370,9 +1377,9 @@ break
             }
             break
 
-case 'play':  case 'song': {
-Maria.sendMessage(from, { react: { text: "📥", key: m.key }}) 
-if (!text) return reply(`Beispiel : ${prefix + command} `)
+case 'play':  case 'song': 
+if (isCmd) {
+if (!text) return reply(`Beispiel : ${prefix + command} Song name `)
 const Ayushplaymp3 = require('./Gallery/lib/ytdl2')
 let yts = require("youtube-yts")
         let search = await yts(text)
@@ -1415,8 +1422,8 @@ await Maria.sendMessage(m.chat,{
 break
 ///////////////////////////////////////////////////
 
-case 'chatgpt': case 'gpt':{
-Maria.sendMessage(from, { react: { text: "🤖", key: m.key }}) 
+case 'chatgpt': case 'gpt':
+    if (isCmd) {
               if (!q) return reply(`Please provide a text query. Example: ${prefix + command} Hello, ChatGPT!`);
             
               const apiUrl1 = `https://vihangayt.me/tools/chatgpt?q=${encodeURIComponent(q)}`;
@@ -1471,7 +1478,7 @@ Maria.sendMessage(from, { react: { text: "🤖", key: m.key }})
 
          
 //////////////////////////////
-            case "rules":
+            //case "rules":
       
         const helptxt = `_*📍[Regeln des Bots]📍*_\n\n\n*>>>* Benutze die support nummer aus dem menu,um Probleme Ali Asker zu melden.\n\n*--->* Um Wanda zu deiner Gruppe hinzuzufügen Kontaktiere bitte *ebenfalls Ali Asker* \n\n*--->* Verwenden keine falschen  Befehle, sondern nur die Befehl aus der */menu* liste \n\n*Spamme den Bot nicht mit Befehlen zu, wenn der Bot nicht Reagiert/Antwortet. bedeutet es dass der Bot offline ist oder Verbindungsprobleme hat.* \n\n*Bei einem Regelverstoß wird man Permanent Blockiert!* 🚫 \n\n\n*©️ Wanda Botz inc* `
 
@@ -1479,9 +1486,10 @@ Maria.sendMessage(from, { react: { text: "🤖", key: m.key }})
 
         break
       case 'bot': case 'hilfe': case 'funk nicht':
+        
        
         
-        let txxt = `👋🏻 Hey *${pushname}*, Ich bin *Wanda*📍\nEin Whatsapp Bot erstellt von: Ali Asker \n\n Falls du Hilfe benötigst schreibe gerne meinen Besitzer unter:+4915902605449`
+        let txxt = `👋🏻 Hey *${pushname}*, Ich bin *ҡאƶ-Bot*📍\nEin Whatsapp Bot erstellt von: Exiqon \n\n Falls du Hilfe benötigst schreibe gerne meinen Besitzern mit:${prefix}owner`
 
         Maria.sendMessage(m.chat, { image: { url: "./Gallery/ch1.jpg" }, caption: txxt, gifPlayback: true }, { quoted: m });
         break
@@ -1492,19 +1500,20 @@ Maria.sendMessage(from, { react: { text: "🤖", key: m.key }})
 https://chat.whatsapp.com/KSM8yCpBHGUGkb2f3zfGz7`
 
         await Maria.sendMessage(m.chat,{ text: `${tex}` },);
- let teks = `── 「 Antwort 📝」 ──\n\n*Angefragt*: ${m.sender} 🔢\n*Message*: ${text} \n*Antwort* :`
-        await Maria.sendMessage("120363225734488240@g.us",{ text: teks, gifPlayback: true }, { quoted: m });
+ let teks = `── 「 Supportanfrage 📝」 ──\n\n*User*: ${m.sender} \n*Nachricht*: ${text}`
+        await Maria.sendMessage("120363293554711738@g.us",{ text: teks, gifPlayback: true }, { quoted: m });
         break
 
       case "info":
-            Maria.sendMessage(from, { react: { text: "ℹ️", key: m.key }}) 
-        let ifx = `🌟『Wanda』🌟
+        
+
+        let ifx = `🌟『ҡאƶ-Bot』🌟
 *🌟Beschreibung:* Ein WhatsApp-Bot mit einer umfangreichen Auswahl an Funktionen und cleveren Extras.
-*👤Creator:* Ali Asker
+*👤Creator:* Exiqon
 *🕸Version:* 1.1.0
-*🎀support:* +4915902605449
+*🎀support:* ${prefix} support
 *🚦Laufzeit:* ${runtime(process.uptime())}\n
-*Powered by Askero Botz Inc.*`
+*Powered by Exiqonbotz Inc.*`
 Maria.sendMessage(m.chat, { image: { url: "./Gallery/ch3.jpg" }, caption: ifx, gifPlayback: true }, { quoted: m });
         break
 
@@ -1785,20 +1794,17 @@ case 'truth':
                            Maria.sendMessage(from, { image: buffer, caption: '*You have chosen Truth*\n'+ Mariatruthww }, {quoted:m})
                            break
                            
-  case 'menu': case 'help': case 'befehle': 
+  case 'menu': case 'help': case 'befehle':
   const txt = `╭─「 *Konichiwa* 」
 │⋊ 𝕌𝕤𝕖𝕣: *${pushname}* 
-│⋊ 𝕓𝕠𝕥 ℕ𝕒𝕞𝕖: *Wanda*
+│⋊ 𝕓𝕠𝕥 ℕ𝕒𝕞𝕖: *${botname}*
 │⋊ ℙ𝕣𝕖𝕗𝕚𝕩:  [ *${prefix}* ]
-│⋊ 𝕆𝕨𝕟𝕖𝕣: *Askero*
-│⋊ 𝕆𝕗𝕗𝕚𝕔𝕚𝕒𝕝 𝔾𝕙𝕒𝕥 𝔾𝕣𝕠𝕦𝕡:
-https://chat.whatsapp.com/KesJbjwnfYe0oBMkphuohO
+│⋊ 𝕆𝕨𝕟𝕖𝕣: *ZAKUTOxKAI*
 ╰────────────┈平和
-Verfügbare Befehle.🔖
+Verfügbare Befehle.🔧
 ${readmore}
 ┌──⊰ _*⚙️Allgemein⚙️*_
 │⊳ ⚙️ ${prefix}info
-│⊳ ⚙️ ${prefix}rules
 │⊳ ⚙️ ${prefix}runtime
 │⊳ ⚙️ ${prefix}ping
 └──────────⊰
@@ -1843,25 +1849,7 @@ ${readmore}
 │⊳ 📥 ${prefix}igvideo
 └──────────⊰
 ┌──⊰ _*🔖support🔖*_
-│⊳ 📥 +4915902605449
-│⊳ 📥 Ali Asker
-└──────────⊰
-┌──⊰ _*🎐SnapBlend🎐*_
-│⊳🎀 ${prefix}shadow
-│⊳🎀 ${prefix}write
-│⊳🎀 ${prefix}smoke
-│⊳🎀 ${prefix}burnpaper
-│⊳🎀 ${prefix}romantic
-│⊳🎀 ${prefix}writeart
-│⊳🎀 ${prefix}rainboweffect
-│⊳🎀 ${prefix}smokyneon
-│⊳🎀 ${prefix}underwaterocean
-│⊳🎀 ${prefix}coffecup
-│⊳🎀 ${prefix}doublelove
-│⊳🎀 ${prefix}undergrass
-│⊳🎀 ${prefix}love
-│⊳🎀 ${prefix}narutobanner
-│⊳🎀 ${prefix}shinetext
+│⊳ 📥 ${prefix}support
 └──────────⊰
 ┌──⊰ _*⛩️Sonstiges⛩️*_
 │⊳ 🏮 ${prefix}sticker
@@ -1880,11 +1868,10 @@ ${readmore}
 │⊳ 🏮 ${prefix}emojimix
 │⊳ 🏮 ${prefix}circlevideo
 │⊳ 🏮 ${prefix}google
-│⊳ 🏮 ${prefix}gpt
 └──────────⊰
-🍂 To enable NSFW (Admin only!), enter  *${prefix}nsfw* 
+🔞 Um NSFW zu aktivieren verwende: *${prefix}nsfw* 
 
-🍂 Obtain the full list of NSFW commands by typing  *${prefix}nsfwmenu*`
+🔞 Die vollständige Liste der NSFW-Befehle erhälst du durch die Eingabe von: *${prefix}nsfwmenu*`
 
   if (randomImage) {
     Maria.sendMessage(from, { image: { url: randomImage }, caption: txt }, { quoted: m });
@@ -1906,8 +1893,8 @@ break
                     }
                     break
 case "couple":
-        {
-          if (!m.isGroup) return reply(mess.group);
+    if (isCmd) {
+            if (!m.isGroup) return reply(mess.group);
           let member = participants.map((u) => u.id);
           let orang = member[Math.floor(Math.random() * member.length)];
           let jodoh = member[Math.floor(Math.random() * member.length)];
@@ -1941,7 +1928,8 @@ Cieeee, What's Going On❤️💖👀`,
         
         //mode 
         
-case 'public': {
+case 'public': 
+if (isCmd) {
                 if (!isCreator) return reply(mess.owner)
                 Maria.public = true
                 reply('*Successful in Changing To Public Usage*')
@@ -1973,16 +1961,16 @@ case 'public': {
 `
         Maria.sendMessage(m.chat, { image: { url: "./Gallery/nsfw.jpg" }, caption: nsfwmenu }, { quoted: m });
         break
-              case 'nsfw': {
-   Maria.sendMessage(from, { react: { text: "🔞", key: m.key }}) 
+              case 'nsfw': 
+              if (isCmd) {
  if (!m.isGroup) return reply(mess.group);
                  if (!isAdmins && !isGroupOwner && !isCreator) return reply(mess.admin)
                 if (!isBotAdmins) return reply(mess.botAdmin)
 if (args[0] === "on") {
-if (AntiNsfw) return reply('Already activated✅️')
+if (AntiNsfw) return reply('Bereits aktiviert✅️')
 isnsfw.push(from)
 fs.writeFileSync('./Gallery/database/nsfw.json', JSON.stringify(isnsfw))
-reply('Successfully activating nsfw mode in this group ✔️')
+reply('NSFW mode in dieser Gruppe erfolgreich aktiviert ✔️')
 var groupe = await Maria.groupMetadata(from)
 var members = groupe['participants']
 var mems = []
@@ -1991,16 +1979,16 @@ mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
 })
 Maria.sendMessage(from, {text: `\`\`\``, contextInfo: { mentionedJid : mems }}, {quoted:m})
 } else if (args[0] === "off") {
-if (!AntiNsfw) return reply('Already deactivated')
+if (!AntiNsfw) return reply('Bereits deaktiviert')
 let off = isnsfw.indexOf(from)
 isnsfw.splice(off, 1)
 fs.writeFileSync('./Gallery/database/nsfw.json', JSON.stringify(isnsfw))
-reply('Successfully deactivating nsfw mode in this group ✔️')
+reply('NSFW mode in dieser Gruppe erfolgreich deaktiviert ✔️')
 } else {
-  await reply(`*Kindly input the choice as follows:*
-*Example: ${prefix + command} on*
-*Example: ${prefix + command} off*
-🟢 *Use 'on' to enable and 'off' to disable.* 🔴`)
+  await reply(`*Wähle:*
+*${prefix + command} on*
+*${prefix + command} off*
+`)
   }
   }
   break  
@@ -2097,7 +2085,8 @@ break;
 
 
 			    ////
-			    case 'hd': {
+			    case 'hd': 
+                if (isCmd) {
 			if (!quoted) return reply(`Where is the picture?`)
 			if (!/image/.test(mime)) return reply(`Send/Reply Photos With Captions ${prefix + command}`)
 			reply(mess.wait)
@@ -2137,7 +2126,8 @@ case 'hidetag': {
  Maria.sendMessage(m.chat, { text : args.join(" ") ? args.join(" ") : '' , mentions: participants.map(a => a.id)}, { quoted: m })
  }
  break
- case'admin': case 'tagadmin':{		
+ case'admin': case 'tagadmin':
+ if (isCmd) {	
  if (!m.isGroup) return reply(mess.group)
                 if (!isAdmins && !isCreator) return reply(mess.admin)
                 if (!isBotAdmins) return reply(mess.botAdmin)
@@ -2267,7 +2257,7 @@ break;
 
 case '':
     if (isCmd) {
-        const needhelpmenu = `*Did You Mean ${prefix}help*`;
+        const needhelpmenu = `Meinst du: ${prefix}*menu*`;
 
         let buttonMessage = {
             text: needhelpmenu,
@@ -2405,14 +2395,20 @@ https://chat.whatsapp.com/${response}
           }
         }
         break
-        case 'test': case 'p': case 'ping': 
-        let timestampe = speed()
-        let latensie = speed() - timestampe
-         reply(`🧧Test erfolgreich, Bot ist aktiv\n\n📍 *ping* ${latensie.toFixed(4)} milisekunden\n\n Tippe ${prefix}menu um meine Befehle zu sehen`)
+        
+        case 'ping':
+            if (isCmd) {
+        
+                let start = new Date;
+                await m.reply(`Bitte warte einen Augenblick...`);
+                let done = new Date - start;
+                await reply(`*Aloha! ${pushname}*, Pong!\nGeschwindigkeit: ${done}ms (${Math.round(done / 100) / 10}s)`);
+            }
+
         break   
     
         
-  case 'team': case 'mods': case 'dev': 
+  //case 'team': case 'mods': case 'dev': 
         
             reply(` *━━━〈 🦁ღĹíőͥńͣ BͫØ₸ღ Team🦁 〉━━━*
 

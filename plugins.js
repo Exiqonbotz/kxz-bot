@@ -89,7 +89,7 @@ const {  state,saveCreds } =await useMultiFileAuthState(`./session`)
 	for (let i of kon) {
 	    list.push({
 	    	displayName: await Maria.getName(i + '@s.whatsapp.net'),
-	    	vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await Maria.getName(i + '@s.whatsapp.net')}\nFN:${await Maria.getName(i + '@s.whatsapp.net')}\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Ponsel\nitem2.EMAIL;type=INTERNET:empty\nitem2.X-ABLabel:Email\nitem3.URL:https://instagram.com/Lion-Bot\nitem3.X-ABLabel:Instagram\nitem4.ADR:;;Germany;;;;\nitem4.X-ABLabel:Region\nEND:VCARD`
+	    	vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await Maria.getName(i + '@s.whatsapp.net')}\nFN:${await Maria.getName(i + '@s.whatsapp.net')}\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Ponsel\nitem2.EMAIL;type=INTERNET:empty\nitem2.X-ABLabel:Email\nitem3.URL:https://instagram.com/ҡאƶ-Bot\nitem3.X-ABLabel:Instagram\nitem4.ADR:;;Germany;;;;\nitem4.X-ABLabel:Region\nEND:VCARD`
 	    })
 	}
 	Maria.sendMessage(jid, { contacts: { displayName: global.ownername, contacts: list }, ...opts }, { quoted })
@@ -138,7 +138,7 @@ const {  state,saveCreds } =await useMultiFileAuthState(`./session`)
 Maria.ev.on("connection.update",async  (s) => {
         const { connection, lastDisconnect } = s
         if (connection == "open") {
-console.log(chalk.green('🟨Welcome to Wanda-Bot'));
+console.log(chalk.green('🟨Willkommen zu ҡאƶ-Bot [code by Exiqon]'));
 console.log(chalk.gray('\n\n🚀Initialisiere...'));
 console.log(chalk.cyan('\n\nVerbunden'));
 
@@ -264,7 +264,7 @@ MariaLft = await getBuffer(ppuser)
                 const xtime = moment.tz('Europe/Berlin').format('HH:mm:ss')
 	            const xdate = moment.tz('Europe/Berlin').format('DD/MM/YYYY')
 	            const xmembers = metadata.participants.length
-                Mariabody = `┌──⊰ *🫶🏼Herzlich Willkommen🫶🏼*⊰
+                Mariabody = `┌──⊰ *Herzlich Willkommen*⊰
 │⊳  🌐 In: ${metadata.subject}
 │⊳  📋 Name: @${MariaName.split("@")[0]}
 │⊳  👥 Mitglieder: ${xmembers}th
@@ -290,7 +290,7 @@ Maria.sendMessage(anu.id,
 	                const Mariadate = moment.tz('Europe/Berlin').format('DD/MM/YYYY')
                 	let MariaName = num
                     const Mariamembers = metadata.participants.length
-  Mariabody = `┌──⊰ *🫶🏼Auf wiedersehen🫶🏼*⊰
+  Mariabody = `┌──⊰ *Auf wiedersehen*⊰
 │⊳  👤 From: ${metadata.subject}
 │⊳  📃 Grund: Hat sich vom Staub gemacht💨
 │⊳  📔 Name: @${MariaName.split("@")[0]}

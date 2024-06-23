@@ -35,6 +35,7 @@
         "jsdom": "^22.1.0",
         "lodash": "^4.17.21",
         "moment-timezone": "^0.5.43",
+        "mongoose": "^8.4.3",
         "node-fetch": "^2.6.11",
         "node-id3": "^0.2.3",
         "node-webpmux": "^3.1.7",
@@ -47,6 +48,7 @@
         "qrcode-terminal": "^0.12.0",
         "set-cookie": "^0.0.4",
         "translate-google-api": "^1.0.4",
+        "yarn": "^1.22.22",
         "youtube-yts": "^2.0.0",
         "youtubedl-core": "^4.11.5",
         "ytdl-core": "^4.11.5"
